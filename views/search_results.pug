@@ -1,0 +1,9 @@
+extends layout
+
+include mixins/_hotel
+
+block content
+    h2=title
+    each hotel in searchData
+        .hotel_wrapper
+            +hotel(hotel, searchQuery)

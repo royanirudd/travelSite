@@ -1,0 +1,179 @@
+html {
+    background: white;
+}
+
+body {
+    background: #eee;
+    margin: 0 auto;
+    max-width: 1500px;
+    padding: 0 1em;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #4dc2ca;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    font-size: 1.2ems;
+    display: inline-block;
+    margin: 0 10px;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(43, 40, 40);
+}
+
+.searchNav {
+    background: #c1e6e9;
+    padding: 0.5ems;
+}
+.searchNav > form {
+    display: flex;
+    flex-direction: column;
+}
+input {
+    width: 100%;
+    height: 20px;
+    padding: 0.5em 0;
+    margin-top: 0.3ems;
+    border: 0;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.input_wrapper {
+    magin: 0.5em 0;
+    text-align: center;
+}
+select, button {
+    height: 40px;
+    width: 100px;
+    border: none;
+}
+
+buttons {
+    background: cadetblue;
+    border-radius: 5px;
+}
+
+img {
+    width: 100%;
+}
+
+/* Country section */
+.outside_wrapper {
+    text-align: center;
+    font-size: 1em;
+}
+
+.hotel {
+    background: white;
+    margin: 0 0 1em 0;
+}
+
+.hotel_info {
+    padding: 1em;
+    text-align: center;
+}
+.form_input {
+    margin: 1em 0;
+}
+.form_input input, textarea {
+    /*Moving labels to left*/
+    width: 70%;
+    text-align: left;
+}
+.form_input label {
+    /*label to left*/
+    display: inline-block;
+    width: 20%;
+}
+textarea {
+    border: none;
+    border-radius: 5px;
+}
+.button_small {
+    width: 100px;
+    margin:0.5em;
+
+}
+
+.hotel_order_details {
+    background: #eed;
+    text-align: center;
+    padding: 1em;
+}
+
+/*Large screen sizes media query*/
+@media (min-width: 1000px){
+    nav{
+        /*make it flex row again*/
+        flex-direction: row;
+    }
+    nav a {
+        /*moving logo to left*/
+        flex: 1;
+    }
+    nav ul {
+        /*moving signup to right + padding*/
+        /*take up twice available space*/
+        flex: 2;
+        text-align: right;
+        margin-right: 1em;
+    }
+    /*search form back to row*/
+    .searchNav form {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: flex-end;
+    }
+    /*individual inputs*/
+    .input_wrapper {
+        margin: 0;
+        padding: 0.5em;
+        max-width: 170px;
+        text-align: left;
+    }
+    /*Hotel cards*/
+    .outside_wrapper {
+        text-align: left;
+    }
+    /*Shouldnt apply to hotel details
+    .hotel_wrapper
+    moving hotel label to side*/
+    .hotel_wrapper .hotel {
+        display: flex;
+    }
+    /*Pushing img to right with even margin*/
+    .hotel_img {
+        flex: 1;
+        margin: 1em;
+    }
+    /*padding l/r and equal size as image*/
+    .hotel_info {
+        flex: 1;
+        padding: 0 1em;
+        text-align: left;
+    }
+    .hotel_order_details {
+        /*pushed against left of dividing wall*/
+        text-align: left;
+    }
+    /*Countries as grid btm of home page*/
+    .country_wrapper ul {
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        grid-gap: 20px;
+        text-align: center;
+    }
+
+}
