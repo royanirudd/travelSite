@@ -2,6 +2,4 @@
 node_modules
 public/images
 .env
-.gitignore.pub
-
 new.pub

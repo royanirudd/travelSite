@@ -23,7 +23,8 @@ exports.pushToCloudinary = (req,res,next) => {
             next();
 		})
         .catch(()=>{
-			res.redirect('/admin/add')
+            req.flash('error', "Sorry, there was a problem uploading image, try again");
+			res.redirect('/admin/add');
 		})
 	} else {
         next();
@@ -83,6 +84,7 @@ exports.createHotelPost = async (req,res, next)=> {
     try {
         const hotel = new Hotel(req.body);
         await hotel.save();
+        req.flash('success', `${hotel.hotel_name} created successfully`);
         res.redirect(`/all/${hotel._id}`);
     } catch (error) {
         next(error)
@@ -110,6 +112,7 @@ exports.editRemovePost = async (req, res, next)=> {
             res.render('hotel_detail', {title: 'Add / Remove Hotel', hotelData})
             return
         } else {
+            req.flash('info', 'No matches were found...');
             res.redirect('/admin/edit-remove')
         }
 
@@ -131,6 +134,7 @@ exports.updateHotelPost = async (req,res,next)=> {
     try {
         const hotelID = req.params.hotelId;
         const hotel = await Hotel.findByIdAndUpdate(hotelID, req.body, {new:true});
+        req.flash('success', `${hotel.hotel_name} updated successfully`);
         res.redirect(`/all/${hotelID}`);
     } catch (error) {
         next(error);
@@ -151,6 +155,7 @@ exports.deleteHotelPost = async (req, res, next) => {
     try {
         const hotelID = req.params.hotelId;
         const hotel = await Hotel.findByIdAndDelete({_id: hotelID });
+        req.flash('info', `Hotel ID: ${hotelID} has been deleted`);
         res.render('deleted', {title: 'Deleted successfully'});
     } catch (error) {
         next(error);
@@ -185,7 +190,7 @@ exports.searchResults = async (req,res,next) => {
         const searchQuery = req.body;
         const parsedStars = parseInt(searchQuery.stars) || 1;
         const parsedSort = parseInt(searchQuery.sort) || 1;
-        
+
         const searchData = await Hotel.aggregate([
             { $match: { $text: { $search: `\"${searchQuery.destination}\"` } }},
             { $match: { available: true, star_rating: { $gte: parsedStars}}},

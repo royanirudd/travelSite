@@ -9,10 +9,14 @@ html
             a(href="/")
                 img#logo(src="/images/logo.png", alt="logo")
             ul
-                li
-                    a(href="/sign-up") sign up
-                li
-                    a(href="/login") login
+                if !user
+                    li
+                        a(href="/sign-up") sign up
+                    li
+                        a(href="/login") login
+                else
+                    li
+                        a(href="/logout") logout (#{user.first_name})
         .searchNav
             form(action="/results" method="POST")
                 .input_wrapper
@@ -40,5 +44,11 @@ html
                         option(value="-1") Price: High - Low
                 .input_wrapper
                     button(type="submit") SEARCH
+        - const values = Object.values(flash)
+        - const keys = Object.keys(flash)
+        if keys.length > 0
+            div(class=`message message_${keys}`)
+                span= values
+                span.close_btn(onclick="this.parentNode.remove()") &times;
         img(src='/images/beach.jpg')
     block content
