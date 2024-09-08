@@ -31,7 +31,7 @@ mixin hotel(hotel, searchQuery)
                         .input_wrapper
                             label(for="number-guests") Number of guests
                             input(type="number" id="number-guests" name="numberOfGuests" required)
-                        
+
                         .input_wrapper
                             button(type="submit") SEARCH
 
@@ -44,3 +44,7 @@ mixin hotel(hotel, searchQuery)
                 p= `Total per person: ₹ ${costEach}`
                 hr
                 p= `Total cost: ₹ ${totalCost}`
+
+                - const query = `id=${hotel._id}&duration&{searchQuery.duration}&dateOfDeparture=${searchQuery.dateOfDeparture}&numberOfGuests=${searchQuery.numberOfGuests}`
+                if url === '/results'
+                    a.butt(href=`/confirmation:${query}`) Continue
